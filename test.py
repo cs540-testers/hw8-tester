@@ -50,8 +50,10 @@ class TestRegression(unittest.TestCase):
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
         regression.iterate_gradient(dataset, cols=[1,8], betas=[400,-400,300], T=10, eta=1e-4)
+
         output = capturedOutput.getvalue()
         output_lines = output.split('\n')
+        sys.stdout = sys.__stdout__
 
         expected_lines = ["1 423085332.40 394.45 -405.84 -220.18",
         "2 229744495.73 398.54 -401.54 163.14",
@@ -67,7 +69,7 @@ class TestRegression(unittest.TestCase):
         for out_line, exp_line in zip(output_lines, expected_lines):
             self.assertEqual(out_line, exp_line)
 
-        sys.stdout = sys.__stdout__
+        
 
     def test_compute_betas(self):
         dataset = regression.get_dataset(self.BODYFAT_FILE)
@@ -91,6 +93,7 @@ class TestRegression(unittest.TestCase):
 
         output = capturedOutput.getvalue()
         output_lines = output.split('\n')
+        sys.stdout = sys.__stdout__
 
         expected_lines = ["1 387.33 0.00 0.00 0.00",
         "2 379.60 0.00 0.00 0.01",
@@ -101,10 +104,7 @@ class TestRegression(unittest.TestCase):
         for out_line, exp_line in zip(output_lines, expected_lines):
             self.assertEqual(out_line, exp_line)
 
-        sys.stdout = sys.__stdout__
         
-
-
 
 if __name__ == "__main__":
     unittest.main()

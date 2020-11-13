@@ -26,9 +26,10 @@ class TestRegression(unittest.TestCase):
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
         regression.print_stats(dataset, 1)
-
-        self.assertEqual(capturedOutput.getvalue(), "252\n1.06\n0.02\n")
+        output = capturedOutput.getvalue()
         sys.stdout = sys.__stdout__
+
+        self.assertEqual(output, "252\n1.06\n0.02\n")
 
     def test_regression(self):
         dataset = regression.get_dataset(self.BODYFAT_FILE)

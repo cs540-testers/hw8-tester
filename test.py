@@ -68,9 +68,8 @@ class TestRegression(unittest.TestCase):
         "10 1736958.93 396.96 -403.20 14.65"]
 
         for out_line, exp_line in zip(output_lines, expected_lines):
-            self.assertEqual(out_line, exp_line)
+            self.assertEqual(out_line.rstrip(), exp_line)
 
-        
 
     def test_compute_betas(self):
         dataset = regression.get_dataset(self.BODYFAT_FILE)
@@ -103,9 +102,8 @@ class TestRegression(unittest.TestCase):
         "5 245.75 0.00 0.01 0.03"]
 
         for out_line, exp_line in zip(output_lines, expected_lines):
-            self.assertEqual(out_line, exp_line)
+            self.assertEqual(out_line.rstrip(), exp_line)
 
-        
 
 if __name__ == "__main__":
     unittest.main()
